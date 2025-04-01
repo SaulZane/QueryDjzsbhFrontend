@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>车辆登记证书编号信息查询系统</title>
+    <!-- Bootstrap CSS -->
+    <link href="lib/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            flex: 1;
+            padding-bottom: 100px; /* 为footer留出空间 */
+        }
+        .progress {
+            height: 25px;
+        }
+        .progress-bar {
+            font-size: 14px;
+            line-height: 25px;
+        }
+        .error-message {
+            white-space: pre-line;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #f8f9fa;
+            padding: 15px 0;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+            z-index: 1000;
+        }
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+        .card-header {
+            text-align: center;
+        }
+        .card-header h4 {
+            margin: 0;
+            font-weight: bold;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
+        }
+        .success-section {
+            text-align: center;
+        }
+        .template-link {
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .template-link:hover {
+            color: #0a58ca;
+            text-decoration: underline;
+        }
+        .file-label-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .file-label {
+            margin: 0;
+        }
+        .form-text {
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h4>车辆登记证书编号信息查询系统</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="uploadForm" enctype="multipart/form-data" method="post">
+                                <div class="mb-3">
+                                    <div class="file-label-group">
+                                        <label for="excelFile" class="form-label file-label"> </label>
+                                        <a href="#" class="template-link" id="downloadTemplateBtn">下载模板</a>
+                                    </div>
+                                    <input class="form-control" type="file" id="excelFile" name="file" accept=".xlsx" required>
+                                    <div class="form-text">提示：请按照模板上传，如果点击查询按钮进度卡住，卡住位置为错误数据。</div>
+                                </div>
+                                <div class="button-group">
+                                    <button type="submit" class="btn btn-primary" id="queryBtn">查询</button>
+                                </div>
+                            </form>
+
+                            <!-- 进度条 -->
+                            <div id="progressSection" class="mt-4 d-none">
+                                <h5 class="text-center">处理进度</h5>
+                                <div class="progress mb-2">
+                                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%">0%</div>
+                                </div>
+                                <div id="progressText" class="text-center"></div>
+                            </div>
+
+                            <!-- 错误信息 -->
+                            <div id="errorSection" class="mt-4 d-none">
+                                <div class="alert alert-danger error-message" id="errorMessage"></div>
+                            </div>
+
+                            <!-- 成功信息 -->
+                            <div id="successSection" class="mt-4 d-none success-section">
+                                <div class="alert alert-success">处理完成！</div>
+                                <button type="button" class="btn btn-success" id="downloadResultBtn">下载查询结果</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 版权信息 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="mb-0">©2024-2025|此网站仅授权车务科特定人员使用|如遇故障请联系3079|该网站原作者<b>保留所有权利</b></p>
+                    <p class="mb-0">编码技术栈：前端：Bootstrap|后端：Python+FastAPI+Pandas|代码辅助：Cursor</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="lib/bootstrap.bundle.min.js"></script>
+    <!-- 自定义JS -->
+    <script src="app.js"></script>
+</body>
+</html> 
